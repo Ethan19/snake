@@ -30,6 +30,8 @@ void DrawSnake();//画蛇
 
 void SnakeMove();//蛇动
 
+void DropSnake();//销毁蛇
+
 int main()
 {
 	//显示首页
@@ -155,9 +157,20 @@ void DrawSnake()
 		strncpy(&g_charBackGround[g_ArrSnake[i][0]][g_ArrSnake[i][1]],"▇",2);
 	}
 }
+//销毁蛇
+void DropSnake()
+{
+	int i = 0;
+	for(i=0;g_ArrSnake[i][0]!=0;i++)
+	{
+
+		strncpy(&g_charBackGround[g_ArrSnake[i][0]][g_ArrSnake[i][1]],"  ",2);
+	}
+}
 void SnakeMove()
 {
 	int i = DEF_SNAKE_LONG -1;
+	DropSnake();
 	for(i;i>=1;i--)
 	{
 		//纵坐标任意一个为0，即为不合法
