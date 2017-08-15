@@ -32,6 +32,8 @@ void SnakeMove();//蛇动
 
 void DropSnake();//销毁蛇
 
+void ChangeDir();//改变方向
+
 int main()
 {
 	//显示首页
@@ -53,6 +55,7 @@ int main()
 	while(1)
 	{
 		system("cls");
+		ChangeDir();
 		SnakeMove();
 		showChar();//花背景
 		
@@ -183,6 +186,7 @@ void SnakeMove()
 		g_ArrSnake[i][2] = g_ArrSnake[i-1][2];
 	}
 	//处理蛇头
+	 g_ArrSnake[0][2] = g_nSnakeDir;
 	if(to_west == g_ArrSnake[0][2] || to_east == g_ArrSnake[0][2])
 	{
 		g_ArrSnake[0][1] +=g_ArrSnake[0][2];
@@ -195,4 +199,29 @@ void SnakeMove()
 	//画蛇
 	DrawSnake();
 	
+}
+//蛇随方向动起来
+void ChangeDir()
+{
+	//异步检测输入
+	if(GetAsyncKeyState('W'))
+	{
+		g_nSnakeDir = to_north;
+	}
+	else if(GetAsyncKeyState('S'))
+	{
+		g_nSnakeDir = to_south;
+	}
+	else if(GetAsyncKeyState('A'))
+	{
+		g_nSnakeDir = to_west;
+	
+	}
+	else if(GetAsyncKeyState('D'))
+	{
+		g_nSnakeDir = to_east;
+	
+	}
+	
+
 }

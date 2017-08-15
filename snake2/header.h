@@ -47,3 +47,6 @@ char g_charBackGround[30][50] = {
 int g_ArrSnake[DEF_SNAKE_LONG][3] = {0};
 
 enum{to_east=2,to_west=-2,to_north=-1,to_south=1};
+
+//Éß·½Ïò
+int g_nSnakeDir = to_west;
