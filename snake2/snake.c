@@ -11,6 +11,9 @@
 
 #pragma comment(lib,"winmm.lib")//PlaySound库
 
+typedef int bool;
+#define true 1
+#define false 0
 	//显示首页
 void firstpage();
 
@@ -34,6 +37,7 @@ void DropSnake();//销毁蛇
 
 void ChangeDir();//改变方向
 
+bool IsSnakeDie();//蛇死亡判断
 int main()
 {
 	//显示首页
@@ -56,9 +60,13 @@ int main()
 	{
 		system("cls");
 		ChangeDir();
+		if(false ==  IsSnakeDie())
+		{
+			printf("snake die\n");
+			break;
+		}
 		SnakeMove();
 		showChar();//花背景
-		
 		Sleep(500);
 	}
 
@@ -199,6 +207,29 @@ void SnakeMove()
 	//画蛇
 	DrawSnake();
 	
+}
+//蛇死亡判断
+bool IsSnakeDie()
+{
+		//处理蛇头,下一个是方块就是死亡
+	g_ArrSnake[0][2] = g_nSnakeDir;
+	if(to_west == g_ArrSnake[0][2] || to_east == g_ArrSnake[0][2])
+	{
+		if(0==strncmp(&g_charBackGround[g_ArrSnake[0][0]][g_ArrSnake[0][1]+g_ArrSnake[0][2]],"▇",2))
+		{
+			return false;
+		}
+		//g_ArrSnake[0][1] +=g_ArrSnake[0][2];
+
+	}
+	else
+	{
+		if(0==strncmp(&g_charBackGround[g_ArrSnake[0][0]+g_ArrSnake[0][2]][g_ArrSnake[0][1]],"▇",2))
+		{
+			return false;
+		}
+	}
+	return true;
 }
 //蛇随方向动起来
 void ChangeDir()
